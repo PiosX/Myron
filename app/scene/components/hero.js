@@ -1,16 +1,17 @@
-import { BoxBufferGeometry, Mesh, MeshBasicMaterial } from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-function createHero() {
-  // create a geometry
-  const geometry = new BoxBufferGeometry(2, 2, 2);
+import { setupModel } from './setupModel.js';
 
-  // create a default (white) Basic material
-  const material = new MeshBasicMaterial();
+async function loadHero() {
+  const loader = new GLTFLoader();
 
-  // create a Mesh containing the geometry and material
-  const cube = new Mesh(geometry, material);
+  const heroData = await loader.loadAsync('humanStatue.glb');
 
-  return cube;
+  const hero = setupModel(heroData);
+  hero.position.set(0, 0, 0);
+  hero.scale.multiplyScalar(0.002);
+
+  return { hero };
 }
 
-export { createHero };
+export { loadHero };

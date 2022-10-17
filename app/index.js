@@ -1,14 +1,16 @@
 import World from './scene/World';
 class App {
   constructor() {
-    this.scene = document.querySelector('.scene');
+    this.pScene = document.querySelector('.scene');
     this.mainScene();
   }
 
-  mainScene() {
-    this.world = new World(this.scene);
+  async mainScene() {
+    const world = new World(this.pScene);
 
-    this.world.render();
+    await world.init();
+
+    world.start();
   }
 }
 

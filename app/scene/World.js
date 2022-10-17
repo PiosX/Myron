@@ -1,28 +1,50 @@
-import { createCamera } from './components/camera';
-import { createHero } from './components/hero';
-import { createScene } from './components/scene';
+import { loadHero } from './components/hero.js';
+import { createCamera } from './components/camera.js';
+import { createLights } from './components/lights.js';
+import { createScene } from './components/scene.js';
 
-import { createRenderer } from './systems/renderer';
-import { Resizer } from './systems/Resizer';
+import { createRenderer } from './systems/renderer.js';
+import { Resizer } from './systems/Resizer.js';
+import { Loop } from './systems/loop.js';
 
 let camera;
 let renderer;
 let scene;
+let loop;
 
 export default class World {
   constructor(container) {
     camera = createCamera();
-    scene = createScene();
     renderer = createRenderer();
+    scene = createScene();
+    loop = new Loop(camera, scene, renderer);
     container.append(renderer.domElement);
 
-    this.hero = createHero();
-    scene.add(this.hero);
+    const { light, ambientLight } = createLights();
+
+    scene.add(light, ambientLight);
 
     const resizer = new Resizer(container, camera, renderer);
+    resizer.onResize = () => {
+      this.render();
+    };
+  }
+
+  async init() {
+    const { hero } = await loadHero();
+
+    scene.add(hero);
   }
 
   render() {
     renderer.render(scene, camera);
+  }
+
+  start() {
+    loop.start();
+  }
+
+  stop() {
+    loop.stop();
   }
 }
