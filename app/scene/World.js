@@ -33,6 +33,7 @@ export default class World {
   async init() {
     const { hero } = await loadHero();
 
+    // loop.updatables.push(hero);
     scene.add(hero);
   }
 
