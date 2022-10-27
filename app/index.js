@@ -42,6 +42,12 @@ export default class Sketch {
 
     this.reflexPointer = document.querySelector('.reflex--pointer');
 
+    this.footer = document.querySelector('.footer');
+    this.smile = document.querySelector('.footer__smile');
+    this.sad = document.querySelector('.footer__sad');
+    this.thx = document.querySelector('.footer__thx');
+    this.mask = document.querySelector('.mask');
+
     this.container.appendChild(this.renderer.domElement);
 
     this.camera = new THREE.PerspectiveCamera(
@@ -114,6 +120,7 @@ export default class Sketch {
     });
 
     this.cameraPositions();
+    this.footerEvents();
     // this.cameraMovement();
   }
 
@@ -173,8 +180,12 @@ export default class Sketch {
     });
     this.camera.position.set(-275, 179, -537);
     this.camera.rotation.set(0, -0.78, 0);
-    window.addEventListener('click', () => {
+    this.mask.addEventListener('click', () => {
       if (this.counter === 0) {
+        this.mask.style.display = 'none';
+        setTimeout(() => {
+          this.mask.style.display = 'block';
+        }, 1500);
         GSAP.to(this.headerTitle, {
           transform: 'translateX(-200%)',
           duration: 1,
@@ -211,6 +222,10 @@ export default class Sketch {
         return [this.counter++, (this.wheelCounter = 1000)];
       }
       if (this.counter === 1) {
+        this.mask.style.display = 'none';
+        setTimeout(() => {
+          this.mask.style.display = 'block';
+        }, 1500);
         GSAP.to(this.camera.position, { x: -198, duration: 1.2 });
         GSAP.to(this.camera.position, { y: -68, duration: 1.2 });
         GSAP.to(this.camera.position, { z: -336, duration: 1.2 });
@@ -249,6 +264,10 @@ export default class Sketch {
         return [this.counter++, (this.wheelCounter = 2000)];
       }
       if (this.counter === 2) {
+        this.mask.style.display = 'none';
+        setTimeout(() => {
+          this.mask.style.display = 'block';
+        }, 1500);
         GSAP.to(this.camera.position, { x: -185, duration: 1.2 });
         GSAP.to(this.camera.position, { y: -506, duration: 1.2 });
         GSAP.to(this.camera.position, { z: -475, duration: 1.2 });
@@ -286,6 +305,10 @@ export default class Sketch {
         return [this.counter++, (this.wheelCounter = 3000)];
       }
       if (this.counter === 3) {
+        this.mask.style.display = 'none';
+        setTimeout(() => {
+          this.mask.style.display = 'block';
+        }, 1500);
         GSAP.to(this.camera.position, { x: 230, duration: 1.2 });
         GSAP.to(this.camera.position, { y: 42, duration: 1.2 });
         GSAP.to(this.camera.position, { z: -590, duration: 1.2 });
@@ -323,6 +346,10 @@ export default class Sketch {
         return [this.counter++, (this.wheelCounter = 4000)];
       }
       if (this.counter === 4) {
+        this.mask.style.display = 'none';
+        setTimeout(() => {
+          this.mask.style.display = 'block';
+        }, 1500);
         GSAP.to(this.camera.position, { x: 443, duration: 1.2 });
         GSAP.to(this.camera.position, { y: -318, duration: 1.2 });
         GSAP.to(this.camera.position, { z: -176, duration: 1.2 });
@@ -359,6 +386,10 @@ export default class Sketch {
         return [this.counter++, (this.wheelCounter = 5000)];
       }
       if (this.counter === 5) {
+        this.mask.style.display = 'none';
+        setTimeout(() => {
+          this.mask.style.display = 'block';
+        }, 1500);
         GSAP.to(this.camera.position, { x: 43, duration: 1.2 });
         GSAP.to(this.camera.position, { y: -102, duration: 1.2 });
         GSAP.to(this.camera.position, { z: 19, duration: 1.2 });
@@ -390,7 +421,34 @@ export default class Sketch {
           duration: 0.3,
         });
 
-        return [this.counter++, (this.wheelCounter = 5000)];
+        return [this.counter++, (this.wheelCounter = 6000)];
+      }
+      if (this.counter === 6) {
+        this.mask.style.display = 'none';
+        setTimeout(() => {
+          this.mask.style.display = 'block';
+        }, 1500);
+        GSAP.to(this.footer, { transform: 'translateY(-50%)', duration: 1.2 });
+
+        return [this.counter++, (this.wheelCounter = 7000)];
+      }
+      if (this.counter > 6) {
+        this.mask.style.display = 'none';
+        setTimeout(() => {
+          this.mask.style.display = 'block';
+        }, 1500);
+        if (this.counter % 2 === 0) {
+          GSAP.to(this.footer, {
+            transform: 'translateY(-50%)',
+            duration: 1.2,
+          });
+        } else {
+          GSAP.to(this.footer, {
+            transform: 'translateY(100%)',
+            duration: 1.2,
+          });
+        }
+        return this.counter++;
       }
     });
     window.addEventListener('wheel', (e) => {
@@ -612,9 +670,28 @@ export default class Sketch {
           duration: 0.3,
         });
 
-        return [this.counter++, (this.wheelCounter = 5000)];
+        return [this.counter++, (this.wheelCounter = 6000)];
+      }
+      if (this.counter === 6 && this.wheelCounter >= 7000) {
+        GSAP.to(this.footer, { transform: 'translateY(-50%)', duration: 1.2 });
+
+        return [this.counter++, (this.wheelCounter = 7000)];
       }
       return this.wheelCounter;
+    });
+  }
+
+  footerEvents() {
+    this.smile.addEventListener('click', () => {
+      this.smile.style.fill = '#00d29c';
+      this.sad.style.opacity = '0.5';
+      this.sad.style.pointerEvents = 'none';
+      GSAP.to(this.thx, { opacity: 1, duration: 1 });
+    });
+    this.sad.addEventListener('click', () => {
+      this.sad.style.fill = '#ff0023';
+      this.smile.style.opacity = '0.5';
+      this.smile.style.pointerEvents = 'none';
     });
   }
 

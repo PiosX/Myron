@@ -1,0 +1,83 @@
+.footer {
+  position: absolute;
+  bottom: -60%;
+  height: 80vh;
+  width: 100%;
+  transform: translateY(100%);
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #111111;
+  border-radius: 3%;
+  z-index: 10;
+
+  &__header {
+    font-size: 20rem;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    color: $special-color;
+  }
+
+  &__author {
+    font-size: 10rem;
+    margin-left: 2rem;
+    margin-top: 5rem;
+    &--link {
+      text-decoration: none;
+      color: white;
+      text-transform: lowercase;
+      transition: color 0.3s;
+    }
+    &--link:hover {
+      color: $special-color;
+    }
+  }
+
+  &__text {
+    position: relative;
+    font-size: 10rem;
+    margin-left: 2rem;
+    margin-top: 5rem;
+  }
+
+  &__smile {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    margin-right: 2rem;
+    width: 15rem;
+    height: 15rem;
+    transition: transform 0.5s, fill 0.5s;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  &__smile:hover {
+    transform: translate(-50%, -50%) rotate(0);
+    fill: $special-color;
+  }
+
+  &__sad {
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    transform: translate(-50%, -50%) rotate(20deg);
+    margin-right: 7rem;
+    width: 15rem;
+    height: 15rem;
+    transition: transform 0.5s, fill 0.5s;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  &__sad:hover {
+    transform: translate(-50%, -50%) rotate(0);
+    fill: #ff0023;
+  }
+  &__thx {
+    position: absolute;
+    left: 77%;
+    top: 35%;
+    transform: translate(-50%, -50%) rotate(18deg);
+    font-size: 3rem;
+    opacity: 0;
+  }
+}
