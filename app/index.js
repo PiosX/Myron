@@ -5,14 +5,13 @@ import fragment from 'fragment.glsl';
 import vertex from 'vertex.glsl';
 import fragment1 from 'fragment1.glsl';
 import vertex1 from 'vertex1.glsl';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { TextureLoader } from 'three';
 import { GUI } from 'dat.gui';
+import GSAP from 'gsap';
 
 export default class Sketch {
   constructor(options) {
     this.scene = new THREE.Scene();
-    this.settings();
     this.container = options.dom;
     this.width = this.container.offsetWidth;
     this.height = this.container.offsetHeight;
@@ -22,6 +21,26 @@ export default class Sketch {
     this.renderer.setClearColor(0x000000, 1);
     this.renderer.outputEncoding = THREE.sRGBEncoding;
     this.counter = 0;
+    this.wheelCounter = 0;
+
+    this.reflex = document.querySelector('.reflex');
+    this.reflexDesc = document.querySelector('.reflex--desc');
+    this.harmony = document.querySelector('.harmony');
+    this.harmonyDesc = document.querySelector('.harmony--desc');
+    this.strength = document.querySelector('.strength');
+    this.strengthDesc = document.querySelector('.strength--desc');
+    this.condition = document.querySelector('.condition');
+    this.conditionDesc = document.querySelector('.condition--desc');
+    this.agility = document.querySelector('.agility');
+    this.agilityDesc = document.querySelector('.agility--desc');
+    this.intelligence = document.querySelector('.intelligence');
+    this.intelligenceDesc = document.querySelector('.intelligence--desc');
+
+    this.headerTitle = document.querySelector('.header__title');
+    this.headerLine = document.querySelector('.header__line');
+    this.headerSub = document.querySelector('.header__subtitle');
+
+    this.reflexPointer = document.querySelector('.reflex--pointer');
 
     this.container.appendChild(this.renderer.domElement);
 
@@ -73,18 +92,8 @@ export default class Sketch {
       vertexShader: vertex1,
       fragmentShader: fragment1,
     });
-    this.camera.position.set(0, 0, 2);
     // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.time = 0;
-
-    this.folder = this.gui.addFolder('Move');
-    this.folder.add(this.camera.position, 'x', -1000, 1000, 1);
-    this.folder.add(this.camera.position, 'y', -1000, 1000, 1);
-    this.folder.add(this.camera.position, 'z', -1000, 1000, 1);
-    this.folderR = this.gui.addFolder('Rotation');
-    this.folderR.add(this.camera.rotation, 'x', -360, 360, 0.01);
-    this.folderR.add(this.camera.rotation, 'y', -360, 360, 0.01);
-    this.folderR.add(this.camera.rotation, 'z', -360, 360, 0.01);
 
     this.isPlaying = true;
 
@@ -105,6 +114,7 @@ export default class Sketch {
     });
 
     this.cameraPositions();
+    // this.cameraMovement();
   }
 
   settings() {
@@ -138,7 +148,6 @@ export default class Sketch {
   }
 
   render() {
-    if (!this.isPlaying) return;
     this.time += 0.05;
     this.material.uniforms.time.value = this.time;
     this.discMaterial.uniforms.time.value = this.time;
@@ -148,10 +157,477 @@ export default class Sketch {
   }
 
   cameraPositions() {
-    if (this.counter === 0) {
-      this.camera.position.set(-275, 179, -537);
-      this.camera.rotation.set(0, -0.78, 0);
-    }
+    GSAP.to(this.headerTitle, {
+      transform: 'translateX(0)',
+      duration: 1,
+    });
+    GSAP.to(this.headerLine, {
+      transform: 'translateX(0)',
+      duration: 1,
+      delay: 0.1,
+    });
+    GSAP.to(this.headerSub, {
+      transform: 'translateX(0)',
+      duration: 1,
+      delay: 0.3,
+    });
+    this.camera.position.set(-275, 179, -537);
+    this.camera.rotation.set(0, -0.78, 0);
+    window.addEventListener('click', () => {
+      if (this.counter === 0) {
+        GSAP.to(this.headerTitle, {
+          transform: 'translateX(-200%)',
+          duration: 1,
+          delay: 0.2,
+        });
+        GSAP.to(this.headerLine, {
+          transform: 'translateX(-200%)',
+          duration: 1,
+          delay: 0.1,
+        });
+        GSAP.to(this.headerSub, {
+          transform: 'translateX(-200%)',
+          duration: 1,
+        });
+
+        GSAP.to(this.camera.position, { x: -30, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: 167, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: -227, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -0.73, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        GSAP.to(this.reflex, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.reflexDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+        return [this.counter++, (this.wheelCounter = 1000)];
+      }
+      if (this.counter === 1) {
+        GSAP.to(this.camera.position, { x: -198, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: -68, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: -336, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0.3, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -0.83, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        this.strength.style.transform = 'translate(-300%, -50%)';
+        this.condition.style.transform = 'translate(-300%, -50%)';
+        this.agility.style.transform = 'translate(-300%, -50%)';
+        this.intelligence.style.transform = 'translate(300%, -50%)';
+
+        this.reflexPointer.style.opacity = '0';
+
+        GSAP.to(this.harmony, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.harmonyDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+
+        GSAP.to(this.reflex, {
+          transform: 'translate(300%,-50%)',
+          duration: 0.7,
+          delay: 0.3,
+        });
+        GSAP.to(this.reflexDesc, {
+          opacity: 0,
+          duration: 0.3,
+        });
+        return [this.counter++, (this.wheelCounter = 2000)];
+      }
+      if (this.counter === 2) {
+        GSAP.to(this.camera.position, { x: -185, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: -506, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: -475, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -1, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        this.condition.style.transform = 'translate(-300%, -50%)';
+        this.agility.style.transform = 'translate(-300%, -50%)';
+        this.intelligence.style.transform = 'translate(300%, -50%)';
+
+        this.reflexPointer.style.opacity = '0';
+
+        GSAP.to(this.strength, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.strengthDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+
+        GSAP.to(this.harmony, {
+          transform: 'translate(-300%,-50%)',
+          duration: 0.7,
+          delay: 0.3,
+        });
+        GSAP.to(this.harmonyDesc, {
+          opacity: 0,
+          duration: 0.3,
+        });
+        return [this.counter++, (this.wheelCounter = 3000)];
+      }
+      if (this.counter === 3) {
+        GSAP.to(this.camera.position, { x: 230, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: 42, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: -590, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -3.2, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        this.agility.style.transform = 'translate(-300%, -50%)';
+        this.intelligence.style.transform = 'translate(300%, -50%)';
+
+        this.reflexPointer.style.opacity = '0';
+
+        GSAP.to(this.condition, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.conditionDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+
+        GSAP.to(this.strength, {
+          transform: 'translate(-300%,-50%)',
+          duration: 0.7,
+          delay: 0.3,
+        });
+        GSAP.to(this.strengthDesc, {
+          opacity: 0,
+          duration: 0.3,
+        });
+
+        return [this.counter++, (this.wheelCounter = 4000)];
+      }
+      if (this.counter === 4) {
+        GSAP.to(this.camera.position, { x: 443, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: -318, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: -176, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -4.66, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        this.intelligence.style.transform = 'translate(300%, -50%)';
+
+        this.reflexPointer.style.opacity = '0';
+
+        GSAP.to(this.agility, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.agilityDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+
+        GSAP.to(this.condition, {
+          transform: 'translate(-300%,-50%)',
+          duration: 0.7,
+          delay: 0.3,
+        });
+        GSAP.to(this.conditionDesc, {
+          opacity: 0,
+          duration: 0.3,
+        });
+
+        return [this.counter++, (this.wheelCounter = 5000)];
+      }
+      if (this.counter === 5) {
+        GSAP.to(this.camera.position, { x: 43, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: -102, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: 19, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0.58, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -7.0, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        this.reflexPointer.style.opacity = '0';
+
+        GSAP.to(this.intelligence, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.intelligenceDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+
+        GSAP.to(this.agility, {
+          transform: 'translate(-300%,-50%)',
+          duration: 0.7,
+          delay: 0.3,
+        });
+        GSAP.to(this.agilityDesc, {
+          opacity: 0,
+          duration: 0.3,
+        });
+
+        return [this.counter++, (this.wheelCounter = 5000)];
+      }
+    });
+    window.addEventListener('wheel', (e) => {
+      this.wheelCounter += e.deltaY;
+
+      if (this.counter === 0 && this.wheelCounter >= 1000) {
+        GSAP.to(this.headerTitle, {
+          transform: 'translateX(-200%)',
+          duration: 1,
+          delay: 0.2,
+        });
+        GSAP.to(this.headerLine, {
+          transform: 'translateX(-200%)',
+          duration: 1,
+          delay: 0.1,
+        });
+        GSAP.to(this.headerSub, {
+          transform: 'translateX(-200%)',
+          duration: 1,
+        });
+
+        GSAP.to(this.camera.position, { x: -30, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: 167, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: -227, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -0.73, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        GSAP.to(this.reflex, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.reflexDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+        return [this.counter++, (this.wheelCounter = 1000)];
+      }
+      if (this.counter === 1 && this.wheelCounter >= 2000) {
+        GSAP.to(this.camera.position, { x: -198, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: -68, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: -336, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0.3, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -0.83, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        this.strength.style.transform = 'translate(-300%, -50%)';
+        this.condition.style.transform = 'translate(-300%, -50%)';
+        this.agility.style.transform = 'translate(-300%, -50%)';
+        this.intelligence.style.transform = 'translate(300%, -50%)';
+
+        this.reflexPointer.style.opacity = '0';
+
+        GSAP.to(this.harmony, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.harmonyDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+
+        GSAP.to(this.reflex, {
+          transform: 'translate(300%,-50%)',
+          duration: 0.7,
+          delay: 0.3,
+        });
+        GSAP.to(this.reflexDesc, {
+          opacity: 0,
+          duration: 0.3,
+        });
+        return [this.counter++, (this.wheelCounter = 2000)];
+      }
+      if (this.counter === 2 && this.wheelCounter >= 3000) {
+        GSAP.to(this.camera.position, { x: -185, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: -506, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: -475, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -1, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        this.condition.style.transform = 'translate(-300%, -50%)';
+        this.agility.style.transform = 'translate(-300%, -50%)';
+        this.intelligence.style.transform = 'translate(300%, -50%)';
+
+        this.reflexPointer.style.opacity = '0';
+
+        GSAP.to(this.strength, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.strengthDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+
+        GSAP.to(this.harmony, {
+          transform: 'translate(-300%,-50%)',
+          duration: 0.7,
+          delay: 0.3,
+        });
+        GSAP.to(this.harmonyDesc, {
+          opacity: 0,
+          duration: 0.3,
+        });
+        return [this.counter++, (this.wheelCounter = 3000)];
+      }
+      if (this.counter === 3 && this.wheelCounter >= 4000) {
+        GSAP.to(this.camera.position, { x: 230, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: 42, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: -590, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -3.2, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        this.agility.style.transform = 'translate(-300%, -50%)';
+        this.intelligence.style.transform = 'translate(300%, -50%)';
+
+        this.reflexPointer.style.opacity = '0';
+
+        GSAP.to(this.condition, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.conditionDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+
+        GSAP.to(this.strength, {
+          transform: 'translate(-300%,-50%)',
+          duration: 0.7,
+          delay: 0.3,
+        });
+        GSAP.to(this.strengthDesc, {
+          opacity: 0,
+          duration: 0.3,
+        });
+
+        return [this.counter++, (this.wheelCounter = 4000)];
+      }
+      if (this.counter === 4 && this.wheelCounter >= 5000) {
+        GSAP.to(this.camera.position, { x: 443, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: -318, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: -176, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -4.66, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        this.intelligence.style.transform = 'translate(300%, -50%)';
+
+        this.reflexPointer.style.opacity = '0';
+
+        GSAP.to(this.agility, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.agilityDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+
+        GSAP.to(this.condition, {
+          transform: 'translate(-300%,-50%)',
+          duration: 0.7,
+          delay: 0.3,
+        });
+        GSAP.to(this.conditionDesc, {
+          opacity: 0,
+          duration: 0.3,
+        });
+
+        return [this.counter++, (this.wheelCounter = 5000)];
+      }
+      if (this.counter === 5 && this.wheelCounter >= 6000) {
+        GSAP.to(this.camera.position, { x: 43, duration: 1.2 });
+        GSAP.to(this.camera.position, { y: -102, duration: 1.2 });
+        GSAP.to(this.camera.position, { z: 19, duration: 1.2 });
+
+        GSAP.to(this.camera.rotation, { x: 0.58, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { y: -7.0, duration: 1.2 });
+        GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
+
+        this.reflexPointer.style.opacity = '0';
+
+        GSAP.to(this.intelligence, {
+          transform: 'translate(-50%,-50%)',
+          duration: 1.2,
+          delay: 0.5,
+        });
+        GSAP.to(this.intelligenceDesc, {
+          opacity: 1,
+          duration: 1.2,
+          delay: 2,
+        });
+
+        GSAP.to(this.agility, {
+          transform: 'translate(-300%,-50%)',
+          duration: 0.7,
+          delay: 0.3,
+        });
+        GSAP.to(this.agilityDesc, {
+          opacity: 0,
+          duration: 0.3,
+        });
+
+        return [this.counter++, (this.wheelCounter = 5000)];
+      }
+      return this.wheelCounter;
+    });
+  }
+
+  cameraMovement() {
+    window.addEventListener('mousemove', (e) => {
+      if (this.counter === 0) {
+        this.camera.position.set(
+          -275 + e.clientX / 500,
+          179 + e.clientY / 500,
+          -537
+        );
+      }
+    });
   }
 }
 

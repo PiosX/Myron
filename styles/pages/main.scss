@@ -4,6 +4,7 @@
   top: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   .header {
     position: absolute;
     width: 100%;
@@ -15,12 +16,14 @@
     &__title {
       font-size: 35rem;
       text-transform: uppercase;
+      transform: translateX(-200%);
       color: $special-color;
     }
     &__line {
       height: 5px;
       width: 30%;
       background-color: $font-color;
+      transform: translateX(-200%);
       margin-bottom: 3rem;
     }
     &__subtitle {
@@ -28,6 +31,7 @@
       text-transform: uppercase;
       line-height: 12rem;
       margin-left: 3rem;
+      transform: translateX(-200%);
     }
   }
 
@@ -45,7 +49,7 @@
     &__container {
       position: absolute;
       width: 45%;
-      transform: translate(-50%, -50%);
+
       &__title {
         font-size: 15rem;
         text-transform: uppercase;
@@ -61,17 +65,36 @@
 }
 
 .reflex {
-  top: 50%;
-  left: 28%;
+  top: 33%;
+  left: 76%;
+  transform: translate(300%, -50%);
   &--title {
     color: #ff22f2;
+  }
+  &--desc {
+    opacity: 0;
+  }
+  &--pointer {
+    position: absolute;
+    top: 68%;
+    left: 20%;
+    transform: translate(-50%, -50%) scale(0);
+    transform-origin: center;
+    height: 200px;
+    width: 200px;
+    background-color: transparent;
+    border: 0.5rem solid white;
+    border-radius: 50%;
   }
 }
 
 .strength {
-  top: 50%;
-  left: 28%;
-  display: none;
+  top: 38%;
+  left: 32%;
+  transform: translate(-300%, -50%);
+  &--desc {
+    opacity: 0;
+  }
   &--title {
     color: #2046ff;
   }
@@ -79,36 +102,49 @@
 
 .harmony {
   top: 50%;
-  left: 28%;
-  display: none;
+  left: 25%;
+  transform: translate(-300%, -50%);
   &--title {
     color: #c57600;
+  }
+  &--desc {
+    opacity: 0;
   }
 }
 
 .condition {
-  top: 50%;
-  left: 28%;
-  display: none;
+  top: 30%;
+  left: 30%;
+  transform: translate(-300%, -50%);
   &--title {
     color: #ff0023;
+  }
+  &--desc {
+    opacity: 0;
   }
 }
 
 .agility {
-  top: 50%;
-  left: 28%;
-  display: none;
+  top: 60%;
+  left: 26%;
+  transform: translate(-300%, -50%);
   &--title {
     color: $special-color;
+  }
+  &--desc {
+    opacity: 0;
   }
 }
 
 .intelligence {
-  top: 50%;
-  left: 28%;
-  display: none;
+  top: 36%;
+  left: 61%;
+  transform: translate(300%, -50%);
+
   &--title {
     color: #cfd200;
+  }
+  &--desc {
+    opacity: 0;
   }
 }
