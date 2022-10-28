@@ -234,10 +234,10 @@ export default class Sketch {
         GSAP.to(this.camera.rotation, { y: -0.83, duration: 1.2 });
         GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
 
-        this.strength.style.transform = 'translate(-300%, -50%)';
-        this.condition.style.transform = 'translate(-300%, -50%)';
-        this.agility.style.transform = 'translate(-300%, -50%)';
-        this.intelligence.style.transform = 'translate(300%, -50%)';
+        this.strength.style.transform = 'translate(-500%, -50%)';
+        this.condition.style.transform = 'translate(-500%, -50%)';
+        this.agility.style.transform = 'translate(-500%, -50%)';
+        this.intelligence.style.transform = 'translate(500%, -50%)';
 
         this.reflexPointer.style.opacity = '0';
 
@@ -253,7 +253,7 @@ export default class Sketch {
         });
 
         GSAP.to(this.reflex, {
-          transform: 'translate(300%,-50%)',
+          transform: 'translate(500%,-50%)',
           duration: 0.7,
           delay: 0.3,
         });
@@ -276,9 +276,9 @@ export default class Sketch {
         GSAP.to(this.camera.rotation, { y: -1, duration: 1.2 });
         GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
 
-        this.condition.style.transform = 'translate(-300%, -50%)';
-        this.agility.style.transform = 'translate(-300%, -50%)';
-        this.intelligence.style.transform = 'translate(300%, -50%)';
+        this.condition.style.transform = 'translate(-500%, -50%)';
+        this.agility.style.transform = 'translate(-500%, -50%)';
+        this.intelligence.style.transform = 'translate(500%, -50%)';
 
         this.reflexPointer.style.opacity = '0';
 
@@ -294,7 +294,7 @@ export default class Sketch {
         });
 
         GSAP.to(this.harmony, {
-          transform: 'translate(-300%,-50%)',
+          transform: 'translate(-500%,-50%)',
           duration: 0.7,
           delay: 0.3,
         });
@@ -302,7 +302,7 @@ export default class Sketch {
           opacity: 0,
           duration: 0.3,
         });
-        return [this.counter++, (this.wheelCounter = 3000)];
+        return [this.counter++, (this.wheelCounter = 5000)];
       }
       if (this.counter === 3) {
         this.mask.style.display = 'none';
@@ -317,8 +317,8 @@ export default class Sketch {
         GSAP.to(this.camera.rotation, { y: -3.2, duration: 1.2 });
         GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
 
-        this.agility.style.transform = 'translate(-300%, -50%)';
-        this.intelligence.style.transform = 'translate(300%, -50%)';
+        this.agility.style.transform = 'translate(-500%, -50%)';
+        this.intelligence.style.transform = 'translate(500%, -50%)';
 
         this.reflexPointer.style.opacity = '0';
 
@@ -334,7 +334,7 @@ export default class Sketch {
         });
 
         GSAP.to(this.strength, {
-          transform: 'translate(-300%,-50%)',
+          transform: 'translate(-500%,-50%)',
           duration: 0.7,
           delay: 0.3,
         });
@@ -358,7 +358,7 @@ export default class Sketch {
         GSAP.to(this.camera.rotation, { y: -4.66, duration: 1.2 });
         GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
 
-        this.intelligence.style.transform = 'translate(300%, -50%)';
+        this.intelligence.style.transform = 'translate(500%, -50%)';
 
         this.reflexPointer.style.opacity = '0';
 
@@ -374,7 +374,7 @@ export default class Sketch {
         });
 
         GSAP.to(this.condition, {
-          transform: 'translate(-300%,-50%)',
+          transform: 'translate(-500%,-50%)',
           duration: 0.7,
           delay: 0.3,
         });
@@ -412,7 +412,7 @@ export default class Sketch {
         });
 
         GSAP.to(this.agility, {
-          transform: 'translate(-300%,-50%)',
+          transform: 'translate(-500%,-50%)',
           duration: 0.7,
           delay: 0.3,
         });
@@ -499,10 +499,10 @@ export default class Sketch {
         GSAP.to(this.camera.rotation, { y: -0.83, duration: 1.2 });
         GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
 
-        this.strength.style.transform = 'translate(-300%, -50%)';
-        this.condition.style.transform = 'translate(-300%, -50%)';
-        this.agility.style.transform = 'translate(-300%, -50%)';
-        this.intelligence.style.transform = 'translate(300%, -50%)';
+        this.strength.style.transform = 'translate(-500%, -50%)';
+        this.condition.style.transform = 'translate(-500%, -50%)';
+        this.agility.style.transform = 'translate(-500%, -50%)';
+        this.intelligence.style.transform = 'translate(500%, -50%)';
 
         this.reflexPointer.style.opacity = '0';
 
@@ -518,7 +518,7 @@ export default class Sketch {
         });
 
         GSAP.to(this.reflex, {
-          transform: 'translate(300%,-50%)',
+          transform: 'translate(500%,-50%)',
           duration: 0.7,
           delay: 0.3,
         });
@@ -528,7 +528,7 @@ export default class Sketch {
         });
         return [this.counter++, (this.wheelCounter = 2000)];
       }
-      if (this.counter === 2 && this.wheelCounter >= 3000) {
+      if (this.counter === 2 && this.wheelCounter >= 5000) {
         GSAP.to(this.camera.position, { x: -185, duration: 1.2 });
         GSAP.to(this.camera.position, { y: -506, duration: 1.2 });
         GSAP.to(this.camera.position, { z: -475, duration: 1.2 });
@@ -537,9 +537,9 @@ export default class Sketch {
         GSAP.to(this.camera.rotation, { y: -1, duration: 1.2 });
         GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
 
-        this.condition.style.transform = 'translate(-300%, -50%)';
-        this.agility.style.transform = 'translate(-300%, -50%)';
-        this.intelligence.style.transform = 'translate(300%, -50%)';
+        this.condition.style.transform = 'translate(-500%, -50%)';
+        this.agility.style.transform = 'translate(-500%, -50%)';
+        this.intelligence.style.transform = 'translate(500%, -50%)';
 
         this.reflexPointer.style.opacity = '0';
 
@@ -555,7 +555,7 @@ export default class Sketch {
         });
 
         GSAP.to(this.harmony, {
-          transform: 'translate(-300%,-50%)',
+          transform: 'translate(-500%,-50%)',
           duration: 0.7,
           delay: 0.3,
         });
@@ -563,7 +563,7 @@ export default class Sketch {
           opacity: 0,
           duration: 0.3,
         });
-        return [this.counter++, (this.wheelCounter = 3000)];
+        return [this.counter++, (this.wheelCounter = 5000)];
       }
       if (this.counter === 3 && this.wheelCounter >= 4000) {
         GSAP.to(this.camera.position, { x: 230, duration: 1.2 });
@@ -574,8 +574,8 @@ export default class Sketch {
         GSAP.to(this.camera.rotation, { y: -3.2, duration: 1.2 });
         GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
 
-        this.agility.style.transform = 'translate(-300%, -50%)';
-        this.intelligence.style.transform = 'translate(300%, -50%)';
+        this.agility.style.transform = 'translate(-500%, -50%)';
+        this.intelligence.style.transform = 'translate(500%, -50%)';
 
         this.reflexPointer.style.opacity = '0';
 
@@ -591,7 +591,7 @@ export default class Sketch {
         });
 
         GSAP.to(this.strength, {
-          transform: 'translate(-300%,-50%)',
+          transform: 'translate(-500%,-50%)',
           duration: 0.7,
           delay: 0.3,
         });
@@ -611,7 +611,7 @@ export default class Sketch {
         GSAP.to(this.camera.rotation, { y: -4.66, duration: 1.2 });
         GSAP.to(this.camera.rotation, { z: 0, duration: 1.2 });
 
-        this.intelligence.style.transform = 'translate(300%, -50%)';
+        this.intelligence.style.transform = 'translate(500%, -50%)';
 
         this.reflexPointer.style.opacity = '0';
 
@@ -627,7 +627,7 @@ export default class Sketch {
         });
 
         GSAP.to(this.condition, {
-          transform: 'translate(-300%,-50%)',
+          transform: 'translate(-500%,-50%)',
           duration: 0.7,
           delay: 0.3,
         });
@@ -661,7 +661,7 @@ export default class Sketch {
         });
 
         GSAP.to(this.agility, {
-          transform: 'translate(-300%,-50%)',
+          transform: 'translate(-500%,-50%)',
           duration: 0.7,
           delay: 0.3,
         });

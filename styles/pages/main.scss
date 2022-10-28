@@ -18,6 +18,10 @@
       text-transform: uppercase;
       transform: translateX(-200%);
       color: $special-color;
+
+      @include media('<=phone') {
+        text-align: center;
+      }
     }
     &__line {
       height: 5px;
@@ -25,6 +29,10 @@
       background-color: $font-color;
       transform: translateX(-200%);
       margin-bottom: 3rem;
+
+      @include media('<=phone') {
+        display: none;
+      }
     }
     &__subtitle {
       font-size: 10rem;
@@ -32,6 +40,11 @@
       line-height: 12rem;
       margin-left: 3rem;
       transform: translateX(-200%);
+
+      @include media('<=phone') {
+        margin-top: 8rem;
+        text-align: center;
+      }
     }
   }
 
@@ -54,11 +67,23 @@
         font-size: 15rem;
         text-transform: uppercase;
         margin-bottom: 3rem;
+        @include media('<=phone') {
+          font-size: 26rem;
+        }
       }
       &__desc {
         font-size: 4rem;
         text-transform: uppercase;
         line-height: 5rem;
+
+        @include media('<=phone') {
+          margin-top: 10rem;
+          font-size: 8rem;
+          line-height: 10rem;
+        }
+      }
+      @include media('<=phone') {
+        width: 100%;
       }
     }
   }
@@ -67,9 +92,12 @@
 .reflex {
   top: 33%;
   left: 76%;
-  transform: translate(300%, -50%);
+  transform: translate(500%, -50%);
   &--title {
     color: #ff22f2;
+    @include media('<=phone') {
+      text-align: center;
+    }
   }
   &--desc {
     opacity: 0;
@@ -86,65 +114,111 @@
     border: 0.5rem solid white;
     border-radius: 50%;
   }
+  @include media('<=phone') {
+    text-align: center;
+    top: 50%;
+    left: 50%;
+  }
 }
 
 .strength {
   top: 38%;
   left: 32%;
-  transform: translate(-300%, -50%);
+  transform: translate(-500%, -50%);
   &--desc {
     opacity: 0;
   }
   &--title {
     color: #2046ff;
+    @include media('<=phone') {
+      text-align: center;
+    }
+  }
+  @include media('<=phone') {
+    text-align: center;
+    top: 50%;
+    left: 50%;
   }
 }
 
 .harmony {
   top: 50%;
   left: 25%;
-  transform: translate(-300%, -50%);
+  transform: translate(-500%, -50%);
   &--title {
     color: #c57600;
+    @include media('<=phone') {
+      text-align: center;
+    }
   }
   &--desc {
     opacity: 0;
+  }
+  @include media('<=phone') {
+    text-align: center;
+    top: 50%;
+    left: 50%;
   }
 }
 
 .condition {
   top: 30%;
   left: 30%;
-  transform: translate(-300%, -50%);
+  transform: translate(-500%, -50%);
   &--title {
     color: #ff0023;
+    @include media('<=phone') {
+      text-align: center;
+    }
   }
   &--desc {
     opacity: 0;
+  }
+  @include media('<=phone') {
+    text-align: center;
+    top: 50%;
+    left: 50%;
   }
 }
 
 .agility {
   top: 60%;
   left: 26%;
-  transform: translate(-300%, -50%);
+  transform: translate(-500%, -50%);
   &--title {
     color: $special-color;
+    @include media('<=phone') {
+      text-align: center;
+    }
   }
   &--desc {
     opacity: 0;
+  }
+  @include media('<=phone') {
+    text-align: center;
+    top: 50%;
+    left: 50%;
   }
 }
 
 .intelligence {
   top: 36%;
   left: 61%;
-  transform: translate(300%, -50%);
+  transform: translate(500%, -50%);
 
   &--title {
     color: #cfd200;
+    @include media('<=phone') {
+      font-size: 24rem !important;
+      text-align: center;
+    }
   }
   &--desc {
     opacity: 0;
+  }
+  @include media('<=phone') {
+    text-align: center;
+    top: 50%;
+    left: 50%;
   }
 }

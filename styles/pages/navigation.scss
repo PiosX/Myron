@@ -11,5 +11,8 @@
       color: $special-color;
       text-decoration: none;
     }
+    @include media('<=phone') {
+      font-size: 12rem;
+    }
   }
 }
